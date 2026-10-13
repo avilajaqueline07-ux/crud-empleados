@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 
 import com.example.model.Empleado;
 
-public class DBConexion {
+public class DBConexion implements AutoCloseable {
 	
 	/* Utilizando el metodo println() que esta en el paquete System.out nos 
 	 * permite escribir en la consola, o terminal, informacion o mensajes
@@ -354,6 +354,14 @@ public class DBConexion {
 			connection.setAutoCommit(true);
 		}
 		
+		
+	}
+
+	@Override
+	public void close() throws Exception {
+		// TODO Auto-generated method stub
+		
+		this.conn.close();
 		
 	}
 	
