@@ -2,6 +2,7 @@ package com.example.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.example.model.Empleado;
 
@@ -17,4 +18,14 @@ public interface EmpleadoService {
 	public abstract void persistirEmpleado(Empleado empleado, 
 			List<String> numerosTelefono, List<String> direccionesCorreo )
 					throws SQLException;
+	
+	// Metodo para recuperar los detalles de un empleado
+	// ¿Que son los detalles? Es toda la informacion que no se muestra en 
+	// el listado de empleados, como los telefonos, los correos y el nombre
+	// del Dpto.
+	
+	Map<String, Object> detallesEmpleado(int empleado_id); 
 }
+
+
+

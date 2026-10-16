@@ -210,7 +210,9 @@ public class DBConexion implements AutoCloseable {
 		
 		// Persistir telefonos del empleado persistido
 		String query2 = "INSERT INTO empresa_crud_empleados.telefonos "
-				+ "(numero,empleados_id)\n"
+				+ "(numero,empleados_id)\n"	/**
+				 * Metodo que recupera el nombre de un Departamento dado el id del empleado
+					 */
 				+ "	VALUES (?,?)";
 		
 		// Persistir correos del empleado persistido
@@ -365,8 +367,84 @@ public class DBConexion implements AutoCloseable {
 		
 	}
 	
+	
+	/**
+	 * Metodo que recupera el nombre de un Departamento dado el id del empleado
+	 */
+	public ResultSet nombreDpto(Connection connection, int empleado_id) {
+		
+		String query = "SELECT d.nombre \n"
+				+ "FROM departamentos d JOIN empleados e "
+				+ "on d.id = e.departamentos_id \n"
+				+ "AND  e.id = ?";
+		
+		ResultSet rs = null;
+		
+		try {
+			PreparedStatement pstmt1 = connection.prepareStatement(query);
+			pstmt1.setInt(1, empleado_id);
+			rs = pstmt1.executeQuery();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return rs;
+		
+	}
 
 
+	/**
+	* Metodo que recupera todos los telefonos de un empleado, cuyo id
+	* se pasa como parametro.
+	*/
+	
+	public ResultSet dameTelefonos(Connection connection, int empleado_id) {
+		
+		ResultSet rs = null;
+		
+		String query = "SELECT t.numero \n"
+				+ "FROM telefonos t WHERE t.empleados_id = ?";
+		
+		try {
+			PreparedStatement pstmt1 = connection.prepareStatement(query);
+			pstmt1.setInt(1, empleado_id);
+			rs = pstmt1.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return rs;
+	}
+	
+	/**
+	* Metodo que recupera todos los correos de un empleado, cuyo id
+	* se pasa como parametro.
+	*/
+	
+	public ResultSet dameCorreos(Connection connection, int empleado_id) {
+		
+		ResultSet rs = null;
+		String query = "SELECT c.email \n"
+				+ "from correos c WHERE c.empleados_id = ?";
+		
+		try {
+			PreparedStatement pstmt1 = connection.prepareStatement(query);
+			pstmt1.setInt(1, empleado_id);
+			rs = pstmt1.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return rs;
+	}
+	
+	
 }
 
 

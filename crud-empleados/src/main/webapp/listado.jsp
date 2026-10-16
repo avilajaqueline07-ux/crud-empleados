@@ -53,6 +53,7 @@
 						<td><%=empleado.fechaBaja() != null ? empleado.fechaBaja() : " " %></td>
 						<td><%=empleado.salario() %></td>
 						<td><%=empleado.genero() %></td>
+						<td><a href="DetallesController?empleado_id=<%=empleado.id() %>">Detalles</a></td>
 					</tr>
 					
 					

@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.example.dao.DBConexion;
 import com.example.model.Empleado;
@@ -138,4 +140,63 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 		
 	}
 
+	@Override
+	public Map<String, Object> detallesEmpleado(int empleado_id) {
+
+		Map<String, Object> m = new HashMap<String, Object>();
+		
+		try (DBConexion dbConexion = new DBConexion("root", "Temp2026");
+				Connection connection = dbConexion.getConexion()) {
+			
+			// Recuperamos el nombre del Dpto
+			ResultSet rs1 = dbConexion.nombreDpto(connection, empleado_id);
+			
+			String nombreDelDpto = null;
+			
+			if (rs1.next())
+				nombreDelDpto = rs1.getString("nombre");
+			
+			m.put("nombreDpto", nombreDelDpto);
+				
+			
+			// Recuperamos la lista de telefonos
+			ResultSet rs2 = dbConexion.dameTelefonos(connection, empleado_id);
+			
+			List<String> numerosDeTelefono = new ArrayList<String>();
+			
+			while (rs2.next()) {
+				numerosDeTelefono.add(rs2.getString("numero"));
+			}
+			
+			m.put("telefonos", numerosDeTelefono);
+			
+			// Recuperamos la lista de correos
+			
+			ResultSet rs3 = dbConexion.dameCorreos(connection, empleado_id);
+			
+			List<String> emails = new ArrayList<String>();
+			
+			while (rs3.next()) {
+				emails.add(rs3.getString("email"));
+			}
+			
+			m.put("correos", emails);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+		return m;
+	}
+
 }
+
+
+
+
+
+
+
+
+
