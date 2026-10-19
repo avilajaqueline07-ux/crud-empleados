@@ -76,6 +76,8 @@ public class DetallesController extends HttpServlet {
 			
 			request.setAttribute("telefonos", mm.get("telefonos"));
 			
+			request.setAttribute("emails", mm.get("correos"));
+			
 			request.getRequestDispatcher("detalles.jsp").forward(request, response);
 			
 		} catch (SQLException e) {

@@ -13,6 +13,7 @@
 		Empleado empleado = (Empleado) request.getAttribute("empleado");
 		String nombreDpto = (String) request.getAttribute("nombreDpto");
 		List<String> telefonos = (List<String>) request.getAttribute("telefonos");
+		List<String> correos = (List<String>) request.getAttribute("emails");
 	%>
 	<h1>Detalles del empleado: <%=empleado.nombre() + " "
 	            + empleado.apellido1() + " "
@@ -24,13 +25,31 @@
 	 
 	 <ul>
 	 	<%
-	 		for (String numero : telefonos) {
+	 		for (String telefono : telefonos) {
 	 			%>
-	 			<li><%=numero %></li>
+	 			<li><%=telefono %></li>
 	 			<%
 	 		}
 	 	%>
 	 </ul>
-	            
+	  
+	  
+	 <h3>Correos: </h3>
+	 
+	 <ul>
+	 	<%
+	 		for (String correo : correos) {
+	 			%>
+	 			<li><%=correo %></li>
+	 			<%
+	 		}
+	 	%>
+	 </ul>           
 </body>
 </html>
+
+
+
+
+
+
