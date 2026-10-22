@@ -84,6 +84,8 @@
 	con propositos de prueba, porque realmente el valor del atributo href debe ser
 	el Servlet que recibe la peticion -->
 	<a href="MainController">Recuperar un listado de todos los empleados</a>
+	
+	<a href="NombreApellidosController">Nombre y Apellidos de los Empleados</a>
 </body>
 </html>
 
