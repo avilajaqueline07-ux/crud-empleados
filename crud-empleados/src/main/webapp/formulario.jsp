@@ -1,3 +1,4 @@
+<%@page import="com.example.model.Empleado"%>
 <%@page import="com.example.model.Departamento"%>
 <%@page import="java.util.List"%>
 <%@page import="com.example.service.DepartamentoServiceImpl"%>
@@ -11,6 +12,11 @@
 <title>Formulario</title>
 </head>
 <body>
+	<%
+	
+		Empleado empleado = (Empleado) request.getAttribute("empleado");
+	
+	%>
 	<!-- Para recoger el valor de los controles del formulario, es decir,
 	la informacion del fomulario, en ausencia del lenguaje JavaScript, el atritubuto
 	principal es el atributo name de los elementos o controles de entrada, como 
@@ -51,6 +57,7 @@
 	<fieldset>
 		<legend>Formulario Alta/Modificacion</legend>
 		<form action="AltaController" method="post">
+			<input id="id" name="id" value="<%=empleado == null ? 0 : empleado.id() %>" type="hidden">
 			<label for="nombre">Nombre: </label> 
 			<input id="nombre" name="nombre" type="text" 
 				 placeholder="Su nombre aqui, porfa" 
