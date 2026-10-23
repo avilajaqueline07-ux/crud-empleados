@@ -62,19 +62,22 @@
 			<input id="nombre" name="nombre" type="text" 
 				 placeholder="Su nombre aqui, porfa" 
 			     title="Se solicita el nombre del empleado para darle de alta"
-			     required="required">
+			     required="required" value="<%=empleado != null ? empleado.nombre() : ' ' %>">
 			     
 			<label for="primerApellido">Primer Apellido: </label>
 			<input id="primerApellido" name="primerApellido" type="text" placeholder="Primer apellido aquí "
 				title="Se solicita el primer apellido, que es requerido"
-				required="required">
+				required="required" value="<%=empleado != null ? empleado.apellido1() : ' ' %>">
 			<label for="segundoApellido">Segundo Apellido: </label>
 			<input id="segundoApellido" name="segundoApellido" 
-			     type="text" placeholder="No es obligatorio">
+			     type="text" placeholder="No es obligatorio" 
+			        value="<%=empleado != null ? empleado.apellido2() : ' ' %>">
 			<label for="fechaAlta">Fecha de Alta: </label>
-			<input id="fechaAlta" name="fechaAlta" type="date" required="required">
+			<input id="fechaAlta" name="fechaAlta" type="date" required="required"
+			value="<%=empleado != null ? empleado.fechaAlta() : ' ' %>">
 			<label for="salario">Salario: </label>
-			<input id="salario" name="salario" type="text">
+			<input id="salario" name="salario" type="text"
+			value="<%=empleado != null ? empleado.salario() : ' ' %>">
 			<fieldset>
 				<legend>Genero</legend>
 					<label for="hombre">Hombre: </label>
