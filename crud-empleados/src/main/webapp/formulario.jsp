@@ -1,3 +1,4 @@
+<%@page import="com.example.model.Genero"%>
 <%@page import="com.example.model.Empleado"%>
 <%@page import="com.example.model.Departamento"%>
 <%@page import="java.util.List"%>
@@ -15,6 +16,7 @@
 	<%
 	
 		Empleado empleado = (Empleado) request.getAttribute("empleado");
+		String numerosDeTelefonosDelimitados = (String) request.getAttribute("numerosDeTelefonosDelimitados");
 	
 	%>
 	<!-- Para recoger el valor de los controles del formulario, es decir,
@@ -81,11 +83,17 @@
 			<fieldset>
 				<legend>Genero</legend>
 					<label for="hombre">Hombre: </label>
-					<input id="hombre" type="radio" name="genero" value="HOMBRE">
+					<input id="hombre" type="radio" name="genero" value="HOMBRE"
+						<%=empleado != null && 
+						      empleado.genero().equals(Genero.HOMBRE) ? "checked" : " " %>>
 					<label for="mujer">Mujer: </label>
-					<input id="mujer" type="radio" name="genero" value="MUJER">
+					<input id="mujer" type="radio" name="genero" value="MUJER"
+					   <%=empleado != null && 
+						      empleado.genero().equals(Genero.MUJER) ? "checked" : " " %>>
 					<label for="otro">Otro: </label>
-					<input id="otro" type="radio" name="genero" value="OTRO">
+					<input id="otro" type="radio" name="genero" value="OTRO"
+					   <%=empleado != null && 
+						      empleado.genero().equals(Genero.OTRO) ? "checked" : " " %>>
 			</fieldset>
 			<label for="foto">Foto del Empleado: </label>
 			<input id="foto" type="file">
@@ -104,7 +112,9 @@
 					
 					for (Departamento dpto : departamentos) {
 						%>
-						<option value="<%=dpto.id() %>"><%=dpto.nombre() %></option>
+						<option value="<%=dpto.id() %>" 
+						       <%=empleado != null && empleado.dpto() == dpto.id() ? "selected" : " " %>>
+						     <%=dpto.nombre() %></option>
 						<% 	
 					}
 				%>
@@ -115,7 +125,8 @@
 				 name="telefonos"
 			     type="text" 
 			     placeholder="uno o varios, separados por ;"
-			     title="Uno o varios telefonos separados por el punto y la coma">
+			     title="Uno o varios telefonos separados por el punto y la coma"
+			     value="<%=numerosDeTelefonosDelimitados %>">
 			     
 			<label for="emails">Correo(s): </label>
 			<input id="emails"

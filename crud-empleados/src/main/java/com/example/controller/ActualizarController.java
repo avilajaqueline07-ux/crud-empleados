@@ -7,10 +7,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.example.model.Empleado;
+import com.example.model.Telefono;
 import com.example.service.EmpleadoService;
 import com.example.service.EmpleadoServiceImpl;
+import com.example.service.TelefonoService;
+import com.example.service.TelefonoServiceImpl;
 
 /**
  * Servlet implementation class ActualizarController
@@ -50,6 +55,19 @@ public class ActualizarController extends HttpServlet {
 					.findFirst().get();
 			
 			request.setAttribute("empleado", empleado);
+			
+			// Recupero los telefonos del empleado
+			TelefonoService telefonoService = new TelefonoServiceImpl();
+			
+			List<String> numerosDeTelefonos = telefonoService.dameTelefonos(id_empleado);
+			
+			// Numeros de telefono separados por punto y coma
+			String numerosDeTelefonosDelimitados = numerosDeTelefonos.stream()
+					.collect(Collectors.joining(";"));
+			
+			request.setAttribute("numerosDeTelefonosDelimitados", numerosDeTelefonosDelimitados);
+					
+			// Recupero las direcciones de correo del empleado
 			
 			request.getRequestDispatcher("formulario.jsp")
 			               .forward(request, response);
