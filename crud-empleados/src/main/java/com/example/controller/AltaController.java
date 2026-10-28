@@ -59,7 +59,7 @@ public class AltaController extends HttpServlet {
 		 * Los datos del formulario se recibiran aqui
 		 * y siempre como cadena de caracteres (String)
 		 */ 
-		
+		int id = Integer.parseInt( request.getParameter("id"));
 		String nombreRecibido = request.getParameter("nombre");
 		String primerApellido = request.getParameter("primerApellido");
 		String segundoApellido = request.getParameter("segundoApellido");
@@ -88,7 +88,7 @@ public class AltaController extends HttpServlet {
 		}
 		
 		// Crear el record empleado 
-		Empleado empleado = new Empleado(0, nombreRecibido, 
+		Empleado empleado = new Empleado(id, nombreRecibido, 
 				primerApellido,  segundoApellido, 
 				fechaAlta, null, salario, genero, null, dpto);
 		
@@ -106,9 +106,29 @@ public class AltaController extends HttpServlet {
 		
 		EmpleadoService empleadoService = new EmpleadoServiceImpl();
 		
+		/**
+		* Hay que preguntar el valor del id del empleado
+		* 
+		* 0: Alta, empleado nuevo (persistirEmpleado())
+		* != 0: Modificacion, empleado existente (actualizarEmpleado()).
+		*/
+		
 		try {
-			empleadoService.persistirEmpleado(empleado,
-					listadoNumerosTelefono, listadoDireccionesCorreo);
+			
+			if (id == 0) {
+				// Alta de empleado nuevo
+				empleadoService.persistirEmpleado(empleado,
+						listadoNumerosTelefono, 
+						listadoDireccionesCorreo);
+			}else {
+				
+				//Actualizacion de un empleado existente
+				
+				empleadoService.actualizarEmpleado(empleado,
+						listadoNumerosTelefono, listadoDireccionesCorreo);
+			}
+				
+			
 			
 			// Mostrar la vista que contiene la tabla de empleados
 			// a ver si el empleado persistido aparece en ella
