@@ -556,4 +556,20 @@ public class DBConexion implements AutoCloseable {
 
 	}
 
+		// Metodo que elimina un empleado con todos sus correos y telefonos 
+	
+	 public void deleteEmpleado(Connection connection, int empleado_id) {
+		 
+		 String query = "delete from empleados where id = ?";
+		 try {
+			PreparedStatement pstmt = connection.prepareStatement(query);
+			pstmt.setInt(1, empleado_id);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	 }
+	
+	
 }

@@ -1,5 +1,6 @@
 package com.example.service;
 
+import java.awt.image.DataBuffer;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -202,6 +203,19 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+	}
+
+	@Override
+	public void deleteEmpleado(int empleado_id) {
+	
+		try(DBConexion dbConexion = new DBConexion("root", "Temp2026") ;
+				Connection connection = dbConexion.getConexion()) {
+			    dbConexion.deleteEmpleado(connection, empleado_id);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 	}
 
 }

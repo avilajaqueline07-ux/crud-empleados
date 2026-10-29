@@ -28,6 +28,9 @@ public interface EmpleadoService {
 	
 	void actualizarEmpleado (Empleado empleado, List<String> numerosTelefono,
 			List<String>direccionesCorreo);
+	
+	void deleteEmpleado (int empleado_id);
+	
 }
 
 
